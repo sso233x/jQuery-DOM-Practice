@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies App</title>
+</head>
+<body>
+    <h1>Movies App</h1>
+    <form id="title-rating-form">
+        <input type="text" id="title" placeholder="Movie Title">
+        <input type="number" id="rating" placeholder="Rating" min="1" max="10">
+        <button type="submit">Submit</button>
+    </form>
+    <div id="item-list"></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+         $(function() {
+            $('#title-rating-form').submit(function(event) {
+                event.preventDefault();
+
+                const title = $('#title').val();
+                const rating = $('#rating').val();
+
+                $('#item-list').append(`
+                    <div class="item">
+                        ${title} - Rating: ${rating}
+                        <button class="remove-button">Remove</button>
+                    </div>
+                `);
+
+                $('#title').val('');
+                $('#rating').val('');
+            });
+
+            $('#item-list').on('click', '.remove-button', function() {
+                $(this).parent().remove();
+            });
+        });
+    </script>
+</body>
+</html>
